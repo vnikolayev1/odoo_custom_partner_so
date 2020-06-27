@@ -1,7 +1,8 @@
 {
     'name': 'Custom module',
 
-    'summary': 'Custom module that alters partner and sales order.',
+    'summary': 'Custom module that alters partner and transfers from'
+               ' confirmed sales order.',
 
     'author': 'Vnikolayev1',
 
@@ -12,6 +13,8 @@
         'base',
         'contacts',
         'sale_management',
+        'stock',
+        'sale_stock',
     ],
     'data': [
         'security/ir.model.access.csv',
