@@ -13,9 +13,11 @@ class ResPartner(models.Model):
     def set_primary_address_if_none(self, parent_id):
         primary_adress_records = self.env['res.partner'].search([
             ('parent_id', '=', parent_id.id),
+            ('type', '=', 'delivery'),
             ('primary_address', '=', True)])
         if not primary_adress_records:
             primary_record = self.env['res.partner'].search([
+                ('type', '=', 'delivery'),
                 ('parent_id', '=', parent_id.id)], limit=1)
             primary_record.primary_address = True
 
@@ -26,6 +28,7 @@ class ResPartner(models.Model):
             primary_adress_records = self.env['res.partner'].search([
                 ('parent_id', '=', res.parent_id.id),
                 ('id', '!=', res.id),
+                ('type', '=', 'delivery'),
                 ('primary_address', '=', True)])
             if res.primary_address and primary_adress_records:
                 for primary_adress_record in primary_adress_records:
@@ -42,6 +45,7 @@ class ResPartner(models.Model):
                 primary_adress_records = self.env['res.partner'].search([
                     ('parent_id', '=', self.parent_id.id),
                     ('id', '!=', self.id),
+                    ('type', '=', 'delivery'),
                     ('primary_address', '=', True)])
                 for primary_adress_record in primary_adress_records:
                     primary_adress_record.primary_address = False
